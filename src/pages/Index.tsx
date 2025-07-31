@@ -4,9 +4,18 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Star, Truck, Shield, Headphones } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { Link } from "react-router-dom";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { useState } from "react";
 
 const Index = () => {
   const featuredProducts: any[] = []; // Empty featured products array
+  const [isHovering, setIsHovering] = useState(false);
+  
+  const slideshowImages = [
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&crop=center",
+    "https://images.unsplash.com/photo-1464822759844-d150baec26ef?w=1920&h=1080&fit=crop&crop=center", 
+    "https://images.unsplash.com/photo-1551632811-561732d1e306?w=1920&h=1080&fit=crop&crop=center"
+  ];
 
   const features = [
     {
@@ -36,12 +45,31 @@ const Index = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-mountain pt-16">
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="relative z-10 text-center max-w-4xl px-4">
-          <Badge className="mb-6 bg-primary/20 text-primary border-primary/30">
-            Premium Mountain Lifestyle
-          </Badge>
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-mountain pt-16 overflow-hidden">
+        {/* Slideshow Background */}
+        <div className="absolute inset-0">
+          <Carousel className="w-full h-full" opts={{ loop: true, duration: 30 }}>
+            <CarouselContent className="h-screen">
+              {slideshowImages.map((image, index) => (
+                <CarouselItem key={index} className="relative w-full h-full">
+                  <div 
+                    className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ${
+                      isHovering ? 'opacity-70' : 'opacity-0'
+                    }`}
+                    style={{ backgroundImage: `url(${image})` }}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+        
+        <div 
+          className="relative z-10 text-center max-w-4xl px-4"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           <h1 className="text-6xl md:text-8xl font-bold text-foreground mb-6 tracking-tight">
             Reach Your
             <span className="block text-primary">SUMMIT</span>
