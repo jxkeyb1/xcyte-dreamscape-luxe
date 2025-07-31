@@ -107,20 +107,19 @@ const About = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-4xl font-bold text-center text-foreground mb-16">Meet Our Team</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {team.map((member, index) => (
+              {/* Empty team cards for you to fill later */}
+              {[1, 2, 3].map((index) => (
                 <Card key={index} className="bg-card border-border overflow-hidden group">
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden">
-                      <img 
-                        src={member.image} 
-                        alt={member.name}
-                        className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
+                      <div className="w-full h-64 bg-muted flex items-center justify-center">
+                        <span className="text-muted-foreground">Team Member {index}</span>
+                      </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-semibold text-foreground mb-2">{member.name}</h3>
-                      <p className="text-primary font-medium mb-3">{member.role}</p>
-                      <p className="text-muted-foreground text-sm">{member.bio}</p>
+                      <h3 className="text-xl font-semibold text-foreground mb-2">Name</h3>
+                      <p className="text-primary font-medium mb-3">Role</p>
+                      <p className="text-muted-foreground text-sm">Bio description</p>
                     </div>
                   </CardContent>
                 </Card>

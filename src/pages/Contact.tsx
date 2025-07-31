@@ -11,22 +11,22 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Address",
-      details: ["1234 Summit Drive", "Alpine Heights, CO 80424"]
+      details: ["Your Address Line 1", "Your Address Line 2"]
     },
     {
       icon: Phone,
       title: "Phone",
-      details: ["+1 (555) 123-4567", "Mon-Fri, 9AM-6PM MST"]
+      details: ["Your Phone Number", "Your Business Hours"]
     },
     {
       icon: Mail,
       title: "Email",
-      details: ["hello@xcyte.com", "support@xcyte.com"]
+      details: ["your@email.com", "support@email.com"]
     },
     {
       icon: Clock,
       title: "Store Hours",
-      details: ["Monday - Friday: 9AM - 8PM", "Saturday - Sunday: 10AM - 6PM"]
+      details: ["Your Opening Hours", "Your Weekend Hours"]
     }
   ];
 
