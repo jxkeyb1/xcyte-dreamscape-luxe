@@ -6,29 +6,12 @@ import Navigation from "@/components/Navigation";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  // Mock cart items - in a real app, this would come from state management
-  const cartItems = [
-    {
-      id: 1,
-      name: "Alpine Summit Jacket",
-      price: 299,
-      quantity: 1,
-      image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200",
-      size: "L"
-    },
-    {
-      id: 2,
-      name: "Peak Performance Hoodie",
-      price: 149,
-      quantity: 2,
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=200",
-      size: "M"
-    }
-  ];
+  // Mock cart items - empty cart
+  const cartItems: any[] = [];
 
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const shipping = 15;
-  const tax = subtotal * 0.08;
+  const shipping = 12; // £12 shipping
+  const tax = subtotal * 0.20; // 20% VAT
   const total = subtotal + shipping + tax;
 
   if (cartItems.length === 0) {
@@ -74,7 +57,7 @@ const Cart = () => {
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-foreground">{item.name}</h3>
                       <p className="text-muted-foreground">Size: {item.size}</p>
-                      <p className="text-lg font-bold text-primary">${item.price}</p>
+                      <p className="text-lg font-bold text-primary">£{item.price}</p>
                     </div>
                     
                     <div className="flex items-center space-x-2">
@@ -105,20 +88,20 @@ const Cart = () => {
               <CardContent className="space-y-4">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span className="font-semibold">${subtotal.toFixed(2)}</span>
+                  <span className="font-semibold">£{subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span className="font-semibold">${shipping.toFixed(2)}</span>
+                  <span className="font-semibold">£{shipping.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Tax</span>
-                  <span className="font-semibold">${tax.toFixed(2)}</span>
+                  <span className="text-muted-foreground">VAT (20%)</span>
+                  <span className="font-semibold">£{tax.toFixed(2)}</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total</span>
-                  <span className="text-primary">${total.toFixed(2)}</span>
+                  <span className="text-primary">£{total.toFixed(2)}</span>
                 </div>
                 
                 <div className="space-y-3 pt-4">

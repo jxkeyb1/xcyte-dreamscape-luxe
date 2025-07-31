@@ -10,21 +10,21 @@ const Index = () => {
     {
       id: 1,
       name: "Alpine Summit Jacket",
-      price: 299,
+      price: 249,
       image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=500",
       badge: "Bestseller"
     },
     {
       id: 2,
       name: "Peak Performance Hoodie",
-      price: 149,
+      price: 119,
       image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500",
       badge: "New"
     },
     {
       id: 3,
       name: "Mountain Trail Pants",
-      price: 189,
+      price: 159,
       image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500",
       badge: "Limited"
     }
@@ -34,7 +34,7 @@ const Index = () => {
     {
       icon: Truck,
       title: "Free Shipping",
-      description: "On orders over $200"
+      description: "On orders over £150"
     },
     {
       icon: Shield,
@@ -135,7 +135,7 @@ const Index = () => {
                       {product.name}
                     </h3>
                     <p className="text-2xl font-bold text-primary mb-4">
-                      ${product.price}
+                      £{product.price}
                     </p>
                     <Button variant="luxury" className="w-full">
                       Add to Cart

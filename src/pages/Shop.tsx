@@ -4,51 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/Navigation";
 
 const Shop = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Alpine Summit Jacket",
-      price: 299,
-      image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400",
-      category: "Outerwear",
-      featured: true
-    },
-    {
-      id: 2,
-      name: "Peak Performance Hoodie",
-      price: 149,
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400",
-      category: "Tops"
-    },
-    {
-      id: 3,
-      name: "Mountain Trail Pants",
-      price: 189,
-      image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400",
-      category: "Bottoms"
-    },
-    {
-      id: 4,
-      name: "Summit Series T-Shirt",
-      price: 79,
-      image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
-      category: "Tops"
-    },
-    {
-      id: 5,
-      name: "Expedition Base Layer",
-      price: 129,
-      image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400",
-      category: "Base Layers"
-    },
-    {
-      id: 6,
-      name: "Alpine Shorts",
-      price: 99,
-      image: "https://images.unsplash.com/photo-1506629905607-83d3d1fb5f36?w=400",
-      category: "Bottoms"
-    }
-  ];
+  const products: any[] = []; // Empty products array
 
   const categories = ["All", "Outerwear", "Tops", "Bottoms", "Base Layers"];
 
@@ -80,45 +36,72 @@ const Shop = () => {
             ))}
           </div>
 
-          {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <Card key={product.id} className="group overflow-hidden bg-card border-border hover:shadow-luxury transition-all duration-500">
-                <CardHeader className="p-0">
-                  <div className="relative overflow-hidden">
-                    <img 
-                      src={product.image} 
-                      alt={product.name}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    {product.featured && (
-                      <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">
-                        Featured
-                      </Badge>
-                    )}
-                    <Badge variant="secondary" className="absolute top-4 right-4">
-                      {product.category}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
-                    {product.name}
-                  </h3>
-                  <p className="text-2xl font-bold text-primary">
-                    ${product.price}
-                  </p>
-                </CardContent>
-                
-                <CardFooter className="p-6 pt-0">
-                  <Button variant="luxury" className="w-full">
-                    Add to Cart
+          {/* Products Grid - Empty State */}
+          {products.length === 0 ? (
+            <div className="text-center py-20">
+              <div className="max-w-md mx-auto">
+                <div className="w-24 h-24 mx-auto mb-6 bg-muted rounded-full flex items-center justify-center">
+                  <div className="text-4xl">👕</div>
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-4">
+                  Collection Coming Soon
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  We're curating an exceptional collection of premium pieces. 
+                  Subscribe to be the first to know when they arrive.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-sm mx-auto">
+                  <input 
+                    type="email" 
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-2 rounded-md bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                  <Button variant="luxury">
+                    Notify Me
                   </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {products.map((product) => (
+                <Card key={product.id} className="group overflow-hidden bg-card border-border hover:shadow-luxury transition-all duration-500">
+                  <CardHeader className="p-0">
+                    <div className="relative overflow-hidden">
+                      <img 
+                        src={product.image} 
+                        alt={product.name}
+                        className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      {product.featured && (
+                        <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">
+                          Featured
+                        </Badge>
+                      )}
+                      <Badge variant="secondary" className="absolute top-4 right-4">
+                        {product.category}
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold text-foreground mb-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-2xl font-bold text-primary">
+                      £{product.price}
+                    </p>
+                  </CardContent>
+                  
+                  <CardFooter className="p-6 pt-0">
+                    <Button variant="luxury" className="w-full">
+                      Add to Cart
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
