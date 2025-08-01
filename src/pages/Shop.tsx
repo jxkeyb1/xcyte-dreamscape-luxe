@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navigation from "@/components/Navigation";
-import ProductManager, { Product } from "@/components/ProductManager";
+import { Product } from "@/components/ProductManager";
 
 const Shop = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -12,23 +11,6 @@ const Shop = () => {
 
   const categories = ["All", "Outerwear", "Tops", "Bottoms", "Base Layers"];
 
-  const addProduct = (productData: Omit<Product, 'id'>) => {
-    const newProduct: Product = {
-      ...productData,
-      id: Date.now().toString()
-    };
-    setProducts([...products, newProduct]);
-  };
-
-  const updateProduct = (id: string, productData: Partial<Product>) => {
-    setProducts(products.map(product => 
-      product.id === id ? { ...product, ...productData } : product
-    ));
-  };
-
-  const deleteProduct = (id: string) => {
-    setProducts(products.filter(product => product.id !== id));
-  };
 
   const filteredProducts = activeCategory === "All" 
     ? products 
@@ -53,13 +35,6 @@ const Shop = () => {
 
         {/* Shop Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <Tabs defaultValue="shop" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="shop">Shop</TabsTrigger>
-              <TabsTrigger value="manage">Manage Products</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="shop" className="mt-8">
               {/* Category Filter */}
               <div className="flex flex-wrap gap-2 mb-8 justify-center">
                 {categories.map((category) => (
@@ -135,17 +110,6 @@ const Shop = () => {
                   ))}
                 </div>
               )}
-            </TabsContent>
-
-            <TabsContent value="manage" className="mt-8">
-              <ProductManager
-                products={products}
-                onAddProduct={addProduct}
-                onUpdateProduct={updateProduct}
-                onDeleteProduct={deleteProduct}
-              />
-            </TabsContent>
-          </Tabs>
         </div>
       </div>
     </div>
