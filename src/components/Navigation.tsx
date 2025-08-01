@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { ShoppingBag, Menu, X, User } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { user, isAdmin } = useAuth();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -55,6 +57,25 @@ const Navigation = () => {
                 </span>
               </Button>
             </Link>
+
+            {/* Admin/Auth Button */}
+            {user ? (
+              isAdmin && (
+                <Link to="/admin">
+                  <Button variant="outline" size="sm">
+                    <User className="h-4 w-4" />
+                    Admin
+                  </Button>
+                </Link>
+              )
+            ) : (
+              <Link to="/auth">
+                <Button variant="outline" size="sm">
+                  <User className="h-4 w-4" />
+                  Sign In
+                </Button>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -92,6 +113,25 @@ const Navigation = () => {
                   </span>
                 </Button>
               </Link>
+
+              {/* Mobile Admin/Auth Button */}
+              {user ? (
+                isAdmin && (
+                  <Link to="/admin" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="outline" className="w-full">
+                      <User className="h-4 w-4" />
+                      Admin
+                    </Button>
+                  </Link>
+                )
+              ) : (
+                <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="outline" className="w-full">
+                    <User className="h-4 w-4" />
+                    Sign In
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         )}
