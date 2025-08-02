@@ -1,15 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/Navigation";
 import { Product } from "@/components/ProductManager";
+import { supabase } from "@/integrations/supabase/client";
 
 const Shop = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [activeCategory, setActiveCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   const categories = ["All", "Outerwear", "Tops", "Bottoms", "Base Layers"];
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      
+      setProducts(data || []);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   const filteredProducts = activeCategory === "All" 
@@ -50,7 +73,11 @@ const Shop = () => {
               </div>
 
               {/* Products Grid */}
-              {filteredProducts.length === 0 ? (
+              {loading ? (
+                <div className="text-center py-20">
+                  <div>Loading products...</div>
+                </div>
+              ) : filteredProducts.length === 0 ? (
                 <div className="text-center py-20">
                   <div className="max-w-md mx-auto">
                     <div className="w-24 h-24 mx-auto mb-6 bg-muted rounded-full flex items-center justify-center">

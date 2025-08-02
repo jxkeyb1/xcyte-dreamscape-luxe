@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mountain, Target, Users, Award } from "lucide-react";
+import { Mountain, Target, Users, Award, Instagram, Facebook } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { Link } from "react-router-dom";
 
@@ -124,6 +124,40 @@ const About = () => {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Social Media Section */}
+        <section className="py-16 bg-muted/50">
+          <div className="max-w-4xl mx-auto text-center px-4">
+            <h2 className="text-3xl font-bold text-foreground mb-6">Follow Our Journey</h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Stay connected with the XCYTE community and see what's happening behind the scenes.
+            </p>
+            <div className="flex gap-6 justify-center">
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <div className="flex items-center justify-center w-16 h-16 bg-background border-2 border-border rounded-full group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+                  <Instagram className="h-8 w-8 text-foreground group-hover:text-primary-foreground" />
+                </div>
+                <p className="text-sm text-muted-foreground mt-2 group-hover:text-foreground transition-colors">Instagram</p>
+              </a>
+              <a 
+                href="https://facebook.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <div className="flex items-center justify-center w-16 h-16 bg-background border-2 border-border rounded-full group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+                  <Facebook className="h-8 w-8 text-foreground group-hover:text-primary-foreground" />
+                </div>
+                <p className="text-sm text-muted-foreground mt-2 group-hover:text-foreground transition-colors">Facebook</p>
+              </a>
             </div>
           </div>
         </section>
