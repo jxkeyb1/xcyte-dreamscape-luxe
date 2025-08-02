@@ -19,33 +19,39 @@ export type Database = {
           category: string
           created_at: string
           description: string | null
+          discount_percentage: number | null
           featured: boolean
           id: string
           image: string | null
           name: string
           price: number
+          sale_price: number | null
           updated_at: string
         }
         Insert: {
           category: string
           created_at?: string
           description?: string | null
+          discount_percentage?: number | null
           featured?: boolean
           id?: string
           image?: string | null
           name: string
           price: number
+          sale_price?: number | null
           updated_at?: string
         }
         Update: {
           category?: string
           created_at?: string
           description?: string | null
+          discount_percentage?: number | null
           featured?: boolean
           id?: string
           image?: string | null
           name?: string
           price?: number
+          sale_price?: number | null
           updated_at?: string
         }
         Relationships: []
@@ -77,6 +83,48 @@ export type Database = {
         }
         Relationships: []
       }
+      promo_codes: {
+        Row: {
+          active: boolean
+          code: string
+          created_at: string
+          current_uses: number | null
+          discount_amount: number | null
+          discount_percentage: number
+          expires_at: string | null
+          id: string
+          max_uses: number | null
+          minimum_order_value: number | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          code: string
+          created_at?: string
+          current_uses?: number | null
+          discount_amount?: number | null
+          discount_percentage: number
+          expires_at?: string | null
+          id?: string
+          max_uses?: number | null
+          minimum_order_value?: number | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          code?: string
+          created_at?: string
+          current_uses?: number | null
+          discount_amount?: number | null
+          discount_percentage?: number
+          expires_at?: string | null
+          id?: string
+          max_uses?: number | null
+          minimum_order_value?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -95,6 +143,24 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      users: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: string
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          role?: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: string
         }
         Relationships: []
       }
