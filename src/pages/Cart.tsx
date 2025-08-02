@@ -4,13 +4,13 @@ import { Separator } from "@/components/ui/separator";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { Link } from "react-router-dom";
+import { useCart } from "@/hooks/useCart";
 
 const Cart = () => {
-  // Mock cart items - empty cart
-  const cartItems: any[] = [];
+  const { cartItems, updateQuantity, removeFromCart, getTotalPrice } = useCart();
 
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const shipping = 12; // £12 shipping
+  const subtotal = getTotalPrice();
+  const shipping = cartItems.length > 0 ? 12 : 0; // £12 shipping if cart has items
   const tax = subtotal * 0.20; // 20% VAT
   const total = subtotal + shipping + tax;
 
@@ -56,21 +56,36 @@ const Cart = () => {
                     
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-foreground">{item.name}</h3>
-                      <p className="text-muted-foreground">Size: {item.size}</p>
-                      <p className="text-lg font-bold text-primary">£{item.price}</p>
+                      <p className="text-muted-foreground">Category: {item.category}</p>
+                      <p className="text-lg font-bold text-primary">
+                        £{(item.sale_price || item.price).toFixed(2)}
+                      </p>
                     </div>
                     
                     <div className="flex items-center space-x-2">
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      >
                         <Minus className="h-4 w-4" />
                       </Button>
                       <span className="w-8 text-center font-semibold">{item.quantity}</span>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      >
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
                     
-                    <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-destructive hover:text-destructive"
+                      onClick={() => removeFromCart(item.id)}
+                    >
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>

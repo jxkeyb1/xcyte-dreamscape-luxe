@@ -19,6 +19,8 @@ export interface Product {
   image?: string;
   description?: string;
   featured: boolean;
+  sale_price?: number;
+  discount_percentage?: number;
 }
 
 interface ProductManagerProps {

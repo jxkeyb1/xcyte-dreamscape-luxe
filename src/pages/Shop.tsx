@@ -5,11 +5,15 @@ import { Badge } from "@/components/ui/badge";
 import Navigation from "@/components/Navigation";
 import { Product } from "@/components/ProductManager";
 import { supabase } from "@/integrations/supabase/client";
+import { useCart } from "@/hooks/useCart";
+import { useToast } from "@/hooks/use-toast";
 
 const Shop = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [activeCategory, setActiveCategory] = useState("ALL");
   const [loading, setLoading] = useState(true);
+  const { addToCart } = useCart();
+  const { toast } = useToast();
 
   const categories = ["ALL", "TOPS", "SHORTS", "TSHIRTS", "JACKETS", "SETS"];
 
@@ -32,6 +36,22 @@ const Shop = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleAddToCart = (product: Product) => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      sale_price: product.sale_price,
+      image: product.image,
+      category: product.category
+    });
+    
+    toast({
+      title: "Added to cart",
+      description: `${product.name} has been added to your cart.`,
+    });
   };
 
 
@@ -129,7 +149,11 @@ const Shop = () => {
                       </CardContent>
                       
                       <CardFooter className="p-6 pt-0">
-                        <Button variant="luxury" className="w-full">
+                        <Button 
+                          variant="luxury" 
+                          className="w-full"
+                          onClick={() => handleAddToCart(product)}
+                        >
                           Add to Cart
                         </Button>
                       </CardFooter>
