@@ -47,7 +47,7 @@ const ProductManager: React.FC<ProductManagerProps> = ({
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
-  const categories = ["Outerwear", "Tops", "Bottoms", "Base Layers"];
+  const categories = ["TOPS", "SHORTS", "TSHIRTS", "JACKETS", "SETS"];
 
   const resetForm = () => {
     setFormData({

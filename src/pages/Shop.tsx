@@ -8,10 +8,10 @@ import { supabase } from "@/integrations/supabase/client";
 
 const Shop = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("ALL");
   const [loading, setLoading] = useState(true);
 
-  const categories = ["All", "Outerwear", "Tops", "Bottoms", "Base Layers"];
+  const categories = ["ALL", "TOPS", "SHORTS", "TSHIRTS", "JACKETS", "SETS"];
 
   useEffect(() => {
     fetchProducts();
@@ -35,7 +35,7 @@ const Shop = () => {
   };
 
 
-  const filteredProducts = activeCategory === "All" 
+  const filteredProducts = activeCategory === "ALL" 
     ? products 
     : products.filter(product => product.category === activeCategory);
 
