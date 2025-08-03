@@ -120,9 +120,11 @@ const Cart = () => {
                 </div>
                 
                 <div className="space-y-3 pt-4">
-                  <Button variant="luxury" className="w-full" size="lg">
-                    Proceed to Checkout
-                  </Button>
+                  <Link to="/checkout" className="block">
+                    <Button variant="luxury" className="w-full" size="lg">
+                      Proceed to Checkout
+                    </Button>
+                  </Link>
                   <Link to="/shop" className="block">
                     <Button variant="outline" className="w-full">
                       Continue Shopping
